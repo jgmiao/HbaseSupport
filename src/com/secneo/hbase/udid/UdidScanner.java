@@ -1,4 +1,4 @@
-package com.secneo.hbase.pkg_udid;
+package com.secneo.hbase.udid;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -8,18 +8,21 @@ import org.apache.hadoop.hbase.thrift2.generated.TIOError;
 import org.apache.hadoop.hbase.thrift2.generated.TResult;
 import org.apache.thrift.TException;
 
-import com.secneo.hbase.HbaseCore;
+import com.secneo.hbase.HbaseScanner;
 import com.secneo.hbase.utils.Config;
 import com.secneo.hbase.utils.Utils;
 
-public class UdidScanner extends HbaseCore {
+/**
+ * 修饰父类的HbaseCore中scan方法 装饰成定制的Scanner完成UDID的扫描匹配
+ */
+public class UdidScanner extends HbaseScanner {
 
 	public UdidScanner(String host, int port) {
 		super(host, port);
 	}
 	
 	/**
-	 * 前缀扫描 修饰父类的scan方法
+	 * 前缀扫描
 	 * @param prefix
 	 * @return
 	 * @throws TIOError

@@ -9,11 +9,14 @@ import org.apache.hadoop.hbase.thrift2.generated.TIOError;
 import org.apache.hadoop.hbase.thrift2.generated.TResult;
 import org.apache.thrift.TException;
 
-import com.secneo.hbase.HbaseCore;
+import com.secneo.hbase.HbaseScanner;
 import com.secneo.hbase.utils.Config;
 import com.secneo.hbase.utils.Utils;
 
-public class ApknameScanner extends HbaseCore {
+/**
+ * 修饰父类的HbaseCore中scan方法 装饰成定制的Scanner完成ApkName的扫描
+ */
+public class ApknameScanner extends HbaseScanner {
 
 	public ApknameScanner(String host, int port) {
 		super(host, port);
@@ -22,12 +25,11 @@ public class ApknameScanner extends HbaseCore {
 	/**
 	 * 修饰父类的scan方法
 	 * @param prefix
-	 * @return
+	 * @return apkName结果集
 	 * @throws TIOError
 	 * @throws TException
 	 */
 	public List<TResult> nameScan() throws TIOError, TException {
-		int iNum = 0;
 		
 		byte[] start = null;
 		ByteBuffer table = Utils.wrap(Config.i.TABLE_AN);
@@ -37,7 +39,7 @@ public class ApknameScanner extends HbaseCore {
 		/**
 		 * 调用父类的scan方法
 		 */
-		while (null != (tmpRes = scan(start, null, table, Config.i.FAMILY_AN, Config.i.COLUMN_AN)) && iNum++ < 5) {
+		while (null != (tmpRes = scan(start, null, table, Config.i.FAMILY_AN, Config.i.COLUMN_AN))) {
 			int tmpResSize = tmpRes.size();
 			if (tmpResSize <= 0) {
 				break;

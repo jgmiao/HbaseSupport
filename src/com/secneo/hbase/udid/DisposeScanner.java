@@ -1,4 +1,4 @@
-package com.secneo.hbase.pkg_udid;
+package com.secneo.hbase.udid;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
@@ -12,11 +12,15 @@ import java.util.Map.Entry;
 
 import org.apache.hadoop.hbase.thrift2.generated.TResult;
 
-import com.secneo.hbase.pkg_udid.jdbc.JDBC;
+import com.secneo.hbase.jdbc.JDBC;
 import com.secneo.hbase.utils.Config;
 import com.secneo.hbase.utils.Utils;
 
-public class DisposeCenter {
+/**
+ * 找出给定应用名同时安装各种破解器的设备量情况
+ * 如找出“英雄三国”和其他各种破解器同时存在与一个设备的UDID
+ */
+public class DisposeScanner {
 	
 	private static final int BUFFER = 512;
 	private static final String UDID_EP = Config.i.UDID_em;
@@ -178,7 +182,7 @@ public class DisposeCenter {
 	}
 	
 	public static void main(String[] args) {
-		DisposeCenter center = new DisposeCenter();
+		DisposeScanner center = new DisposeScanner();
 		
 		List<String> apkNames = decode(Config.i.APK_LIST);
 		List<String> toolNames = decode(Config.i.TOOL_LIST);

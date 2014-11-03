@@ -1,4 +1,4 @@
-package com.secneo.hbase.pkg_udid.jdbc;
+package com.secneo.hbase.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

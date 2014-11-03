@@ -39,7 +39,11 @@ public class Utils {
 	 * 将字符串转换成ByteBuffer
 	 */
 	public static ByteBuffer wrap(String str) {
-		return ByteBuffer.wrap(str.getBytes());
+		ByteBuffer buf = null;
+		if (null != str && str.length() > 0) {
+			buf = ByteBuffer.wrap(str.getBytes());
+		}
+		return buf;
 	}
 
 	/**

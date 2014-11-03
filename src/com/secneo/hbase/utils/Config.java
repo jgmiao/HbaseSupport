@@ -29,6 +29,7 @@ public class Config {
 		this.TABLE_AN = c.getString("TABLE_AN");
 		this.FAMILY_AN = c.getString("FAMILY_AN");
 		this.COLUMN_AN = c.getString("COLUMN_AN");
+		this.ApknameStorageFile = c.getString("apkname_storage_path", "./apkname.txt");
 		
 		//udid的样例
 		this.UDID_em = c.getString("UDID_em", "01ac3975-76b5-36c4-b468-a9a6a08fb2d1");
@@ -51,6 +52,7 @@ public class Config {
     public final String TABLE_AN;
     public final String FAMILY_AN;
     public final String COLUMN_AN;
+    public final String ApknameStorageFile;
     
 	/** MySql */
 	public final String driver;

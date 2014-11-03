@@ -21,6 +21,7 @@ import org.apache.thrift.transport.TTransportException;
 import com.secneo.hbase.utils.Config;
 import com.secneo.hbase.utils.Utils;
 
+
 /**
  * 由此类获取封装的Scanner 需要传入参数Config.i.HOST, Config.i.PORT
  * 
@@ -28,12 +29,12 @@ import com.secneo.hbase.utils.Utils;
  * 
  * @author JGMiao
  */
-public class HbaseCore {
+public class HbaseScanner {
 	private static ClientSupport CLIENT = null;
 	
 	private String[] filters = null;
 	
-	public HbaseCore(String host, int port){
+	public HbaseScanner(String host, int port){
 		if (null == host) {
 			return;
 		}
@@ -66,6 +67,10 @@ public class HbaseCore {
 		List<TColumn> columns = new ArrayList<TColumn>();
 		
 		TColumn column = new TColumn();
+		if (null == table) {
+			Utils.log.error("table name is null, HbaseScanner -> scan()...");
+		}
+		
 		/** 列族的添加 */
 		if (null != family && family.length() > 0) {
 			column.setFamily(Utils.wrap(family));
